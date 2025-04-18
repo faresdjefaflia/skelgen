@@ -1,0 +1,24 @@
+{
+  "name": "skelgen",
+  "version": "1.0.0",
+  "description": "A CLI tool to generate project skeletons",
+  "main": "skelgen.js",
+  "bin": {
+    "skelgen": "skelgen.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "skeleton",
+    "generator",
+    "project",
+    "tool"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^12.5.2"
+  }
+}
