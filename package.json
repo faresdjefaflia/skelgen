@@ -1,10 +1,10 @@
 {
   "name": "skelgen",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A CLI tool to generate project skeletons",
   "main": "skelgen.js",
   "bin": {
-    "skelgen": "npx skelgen"
+    "skelgen": "./skelgen.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
