@@ -30,7 +30,7 @@ To run the **Skelgen** and create your project structure, simply execute the fol
 in root:
 
 ```bash
-Skelgen
+npx skelgen
 ```
 
 ### **3. Project Setup Process**
@@ -47,6 +47,8 @@ When you run the tool, you will be guided through a series of prompts. Here's wh
 3. **Frontend Framework**: The tool will ask you to choose a frontend framework from the following list:
    - **React**
    - **Vue**
+   - **Next.js**
+   - **Nuxt.js**
    - **Angular**
    - **Svelte**
 
@@ -60,19 +62,7 @@ When you run the tool, you will be guided through a series of prompts. Here's wh
 
    The tool will install the dependencies for the selected backend framework and generate the appropriate project structure.
 
-5. **Installation of Dependencies**: After selecting both the frontend and backend frameworks, the tool will automatically install the necessary dependencies for both. Here’s how it works for each framework:
-
-   - **Frontend**:
-     - **React**: Runs `npx create-react-app` in the frontend directory.
-     - **Vue**: Runs `npm init vue@latest` to set up a Vue project.
-     - **Angular**: Runs `ng new my-angular-app` to set up an Angular project.
-     - **Svelte**: Runs `npm init svelte@next` to create a Svelte project.
-
-   - **Backend**:
-     - **Express**: Initializes a new Express project with `express-generator` after installing `express` as a dependency.
-     - **Django**: Runs `django-admin startproject` to set up a Django project.
-     - **NestJS**: Uses the `nestjs/cli` to generate a new NestJS project.
-     - **Flask**: Creates a simple `app.py` file with a basic Flask project structure.
+5. **Installation of Dependencies**: After selecting both the frontend and backend frameworks, the tool will automatically install the necessary dependencies for both.
 
 ---
 
@@ -100,9 +90,9 @@ my-project-name/
 
 ### Example 1: Creating a React and Express Project
 
-1. Run the tool:
+1. Open your folder and install skelngen and run the tool:
    ```bash
-   Skelgen
+   npx skelgen
    ```
 
 2. Provide the project name when prompted (e.g., `my-react-express-project`).

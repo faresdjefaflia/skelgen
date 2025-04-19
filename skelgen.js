@@ -5,7 +5,7 @@ const path = require("path");
 const { execSync } = require("child_process");
 
 // قائمة الفريموركات للفرونت إند
-const frontendFrameworks = ["React", "Vue", "Angular", "Svelte"];
+const frontendFrameworks = ["React", "Next.js", "Vue", "Nuxt.js", "Angular", "Svelte"];
 // قائمة الفريموركات للباك إند
 const backendFrameworks = ["Express", "Django", "NestJS", "Flask"];
 
@@ -13,7 +13,7 @@ const backendFrameworks = ["Express", "Django", "NestJS", "Flask"];
 function createDirectory(dir) {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
-    console.log(`Directory created: ${dir}`);
+    console.log(`📂 Directory created: ${dir}`);
   }
 }
 
@@ -22,7 +22,7 @@ function installPackages(cwd, packages) {
   try {
     execSync(`npm install ${packages}`, { cwd: cwd, stdio: "inherit" });
   } catch (error) {
-    console.error(`Error installing packages: ${error.message}`);
+    console.error(`❌ Error installing packages: ${error.message}`);
   }
 }
 
@@ -33,7 +33,7 @@ async function createProjectStructure() {
     {
       type: "input",
       name: "projectName",
-      message: "Enter the project name:",
+      message: "📛 1 - Enter the project name:",
     },
   ]);
 
@@ -44,14 +44,16 @@ async function createProjectStructure() {
   createDirectory(path.join(basePath, "frontend"));
   createDirectory(path.join(basePath, "backend"));
   createDirectory(path.join(basePath, "database"));
-  console.log(`Project directories created at ${basePath}`);
+  createDirectory(path.join(basePath, "docs"));
+
+  console.log(`📁 Project directories created at ${basePath}`);
 
   // استلام اختيار الفريمورك للفرونت إند
   const frontendAnswers = await inquirer.prompt([
     {
       type: "list",
       name: "frontendFramework",
-      message: "Select frontend framework:",
+      message: "🎨 2 - Select frontend framework:",
       choices: frontendFrameworks,
     },
   ]);
@@ -64,7 +66,7 @@ async function createProjectStructure() {
     {
       type: "list",
       name: "backendFramework",
-      message: "Select backend framework:",
+      message: "🛠️ 3 - Select backend framework:",
       choices: backendFrameworks,
     },
   ]);
@@ -73,7 +75,7 @@ async function createProjectStructure() {
   const backendPath = path.join(basePath, "backend");
 
   // الآن بدأ التثبيت: أولاً للفرونت إند
-  console.log(`Setting up frontend with ${frontendChoice}...`);
+  console.log(`⚙️ 4 - Setting up frontend with ${frontendChoice}...`);
   if (frontendChoice === "React") {
     execSync("npx create-react-app .", { cwd: frontendPath, stdio: "inherit" });
   } else if (frontendChoice === "Vue") {
@@ -81,23 +83,29 @@ async function createProjectStructure() {
   } else if (frontendChoice === "Angular") {
     execSync("ng new my-angular-app", { cwd: frontendPath, stdio: "inherit" });
   } else if (frontendChoice === "Svelte") {
-    execSync("npm init svelte@next", { cwd: frontendPath, stdio: "inherit" });
+    execSync("npx sv create myapp", { cwd: frontendPath, stdio: "inherit" });
+    console.log("🚀 Installing Svelte...");
+    execSync("npm i", { cwd: frontendPath, stdio: "inherit" });
+  } else if (frontendChoice === "Next.js") {
+    execSync("npx create-next-app@latest", { cwd: frontendPath, stdio: "inherit" });
+  } else if (frontendChoice === "Nuxt.js") {
+    execSync("npm create nuxt@latest", { cwd: frontendPath, stdio: "inherit" });
   }
 
   // ثم البدء بتثبيت التبعيات للباك إند
-  console.log(`Setting up backend with ${backendChoice}...`);
+  console.log(`⚙️ 5 - Setting up backend with ${backendChoice}...`);
   if (backendChoice === "Express") {
     execSync("npm init -y", { cwd: backendPath, stdio: "inherit" });
 
     // تثبيت Express
-    console.log("Installing Express...");
+    console.log("🚀 Installing Express...");
     execSync("npm install express", { cwd: backendPath, stdio: "inherit" });
 
     // تشغيل express-generator
-    console.log(`Running npx express-generator in ${backendPath}...`);
+    console.log(`📦 Running npx express-generator in ${backendPath}...`);
     execSync("npx express-generator", { cwd: backendPath, stdio: "inherit" });
 
-    console.log(`Express project structure created in ${backendPath}`);
+    console.log(`✅ Express project structure created in ${backendPath}`);
   } else if (backendChoice === "Django") {
     execSync("django-admin startproject myproject .", { cwd: backendPath, stdio: "inherit" });
   } else if (backendChoice === "NestJS") {
@@ -110,13 +118,22 @@ async function createProjectStructure() {
   // إنشاء مجلد قاعدة البيانات
   const dbPath = path.join(basePath, "database");
   createDirectory(dbPath);
-  console.log(`Database directory created at ${dbPath}`);
+  console.log(`📂 Database directory created at ${dbPath}`);
 
   // تأكيد من إتمام جميع العمليات
-  console.log("Project structure setup complete.");
+  console.log(`
+   ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗     ███████╗████████╗███████╗
+  ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║     ██╔════╝╚══██╔══╝██╔════╝
+  ██║     ██║   ██║██╔████╔██║██████╔╝██║     █████╗     ██║   █████╗  
+  ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║     ██╔══╝     ██║   ██╔══╝  
+  ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ███████╗███████╗   ██║   ███████╗
+   ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚══════╝╚══════╝   ╚═╝   ╚══════╝
+
+🎉 Project structure setup is now complete! 🚀 Enjoy coding! 🎨
+`);
 }
 
 // تشغيل الوظيفة
 createProjectStructure().catch((error) => {
-  console.error("Error creating project structure:", error);
+  console.error("❌ Error creating project structure:", error);
 });
